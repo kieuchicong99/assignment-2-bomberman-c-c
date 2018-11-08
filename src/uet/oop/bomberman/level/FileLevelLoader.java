@@ -50,13 +50,11 @@ public class FileLevelLoader extends LevelLoader {
 
             line = bufferedReader.readLine();
 
-            System.out.println(Integer.parseInt(line.split(" ")[0]));
-            System.out.println(Integer.parseInt(line.split(" ")[1]));
-            System.out.println(Integer.parseInt(line.split(" ")[2]));
+            String data[]=line.split(" ");
 
-            int curLevel = Integer.parseInt(line.split(" ")[0]);
-            int height = Integer.parseInt(line.split(" ")[1]);
-            int width = Integer.parseInt(line.split(" ")[2]);
+            int curLevel = Integer.parseInt(data[0]);
+            int height = Integer.parseInt(data[1]);
+            int width = Integer.parseInt(data[2]);
 
             char map[][] = new char[height][width];
 
