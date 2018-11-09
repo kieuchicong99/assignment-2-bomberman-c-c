@@ -4,9 +4,13 @@ import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.bomb.Bomb;
+import uet.oop.bomberman.entities.bomb.Flame;
+import uet.oop.bomberman.entities.character.enemy.Balloon;
+import uet.oop.bomberman.entities.character.enemy.Enemy;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.input.Keyboard;
+import uet.oop.bomberman.level.Coordinates;
 
 import java.util.Iterator;
 import java.util.List;
@@ -112,26 +116,29 @@ public class Bomber extends Character {
         // TODO: xử lý nhận tín hiệu điều khiển hướng đi từ _input và gọi move() để thực hiện di chuyển
         // TODO: nhớ cập nhật lại giá trị cờ _moving khi thay đổi trạng thái di chuyển
         int xa = 0, ya = 0;
-        if(_input.up){
+        if (_input.up) {
             ya--;
-            _direction=0;
+            _direction = 0;
         }
-        if(_input.down){
+        if (_input.down) {
             ya++;
-            _direction=2;
+            _direction = 2;
         }
-        if(_input.left){
+        if (_input.left) {
             xa--;
-            _direction=3;
+            _direction = 3;
         }
-        if(_input.right){
+        if (_input.right) {
             xa++;
-            _direction=1;
+            _direction = 1;
         }
 
-        if(xa != 0 || ya != 0)  {
-            move(xa * Game.getBomberSpeed(), ya * Game.getBomberSpeed());
-            _moving = true;
+        if (xa != 0 || ya != 0) {
+            if (canMove(xa, ya)) {
+                move(xa * Game.getBomberSpeed(), ya * Game.getBomberSpeed());
+                _moving = true;
+            }
+
         } else {
             _moving = false;
         }
@@ -141,21 +148,54 @@ public class Bomber extends Character {
     @Override
     public boolean canMove(double x, double y) {
         // TODO: kiểm tra có đối tượng tại vị trí chuẩn bị di chuyển đến và có thể di chuyển tới đó hay không
-        return false;
+
+        double xr = _x, yr = _y - 16; //subtract y to get more accurate results
+
+        if(_direction == 0) { yr += _sprite.getSize() -1 ; xr += _sprite.getSize()/2; }
+        if(_direction == 1) {yr += _sprite.getSize()/2; xr += 1;}
+        if(_direction == 2) { xr += _sprite.getSize()/2; yr += 1;}
+        if(_direction == 3) { xr += _sprite.getSize() -1; yr += _sprite.getSize()/2;}
+
+        int xx = Coordinates.pixelToTile(xr) +(int)x;
+        int yy = Coordinates.pixelToTile(yr) +(int)y;
+
+        Entity a = _board.getEntity(xx, yy, this); //entity of the position we want to go
+
+        return collide(a);
     }
 
     @Override
     public void move(double xa, double ya) {
         // TODO: sử dụng canMove() để kiểm tra xem có thể di chuyển tới điểm đã tính toán hay không và thực hiện thay đổi tọa độ _x, _y
         // TODO: nhớ cập nhật giá trị _direction sau khi di chuyển
-     _x+=xa;
-     _y+=ya;
+        _x += xa;
+        _y += ya;
+//        _x=
+//        _y=Coordinates.tileToPixel(Coordinates.pixelToTile(_y));
+
+        System.out.println(_x);
+        System.out.println(_y);
     }
 
     @Override
     public boolean collide(Entity e) {
         // TODO: xử lý va chạm với Flame
         // TODO: xử lý va chạm với Enemy
+
+        if (e instanceof Flame) {
+            this.kill();
+            return false;
+        } else if (e instanceof Enemy) {
+            this.kill();
+            return false;
+        } else if (e.getSprite()!=Sprite.grass) {
+            return false;
+        } if (e instanceof Balloon) {
+            this.kill();
+            return false;
+        } else if (e instanceof Bomber){
+            return false;
+        }
 
         return true;
     }
