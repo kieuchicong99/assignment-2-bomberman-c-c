@@ -7,6 +7,7 @@ import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.character.enemy.Balloon;
 import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.entities.tile.destroyable.Brick;
+import uet.oop.bomberman.entities.tile.item.FlameItem;
 import uet.oop.bomberman.entities.tile.item.SpeedItem;
 import uet.oop.bomberman.exceptions.LoadLevelException;
 import uet.oop.bomberman.graphics.Screen;
@@ -121,13 +122,23 @@ public class FileLevelLoader extends LevelLoader {
                         int xE = x, yE = y;
                         _board.addCharacter(new Balloon(Coordinates.tileToPixel(xE), Coordinates.tileToPixel(yE) + Game.TILES_SIZE, _board));
                         _board.addEntity(xE + yE * _width, new Grass(xE, yE, Sprite.grass));
-
                         break;
+                    case 'f':
+                        _board.addEntity(pos,
+                                new LayeredEntity(x, y,
+                                        new Grass(x, y, Sprite.grass),
+                                        new FlameItem(x, y, Sprite.powerup_flames)
+//                                        ,
+//                                        new Brick(x, y, Sprite.brick)
+                                )
+                        );
+                        break;
+
                     case '2':
                         sprite = Sprite.oneal_left1;
                         _board.addEntity(pos, new Grass(x, y, sprite));
-
                         break;
+
                     default:
                         _board.addEntity(pos, new Grass(x, y, sprite));
                         break;
@@ -144,14 +155,7 @@ public class FileLevelLoader extends LevelLoader {
         // thêm Brick
 
         // thêm Item kèm Brick che phủ ở trên
-        int xI = 1, yI = 2;
-        _board.addEntity(xI + yI * _width,
-                new LayeredEntity(xI, yI,
-                        new Grass(xI, yI, Sprite.grass),
-                        new SpeedItem(xI, yI, Sprite.powerup_flames),
-                        new Brick(xI, yI, Sprite.brick)
-                )
-        );
+
     }
 
 }
