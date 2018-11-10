@@ -2,6 +2,8 @@ package uet.oop.bomberman.entities.bomb;
 
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.character.Bomber;
+import uet.oop.bomberman.entities.character.enemy.Enemy;
 import uet.oop.bomberman.graphics.Screen;
 
 public class Flame extends Entity {
@@ -45,6 +47,20 @@ public class Flame extends Entity {
 		boolean last;
 
 		// TODO: tạo các segment dưới đây
+		int xa = 0;
+		int ya = 0;
+		if 		(_direction == 0) ya = -1;
+		else if (_direction == 1) xa =  1;
+		else if (_direction == 2) ya =  1;
+		else if (_direction == 3) xa = -1;
+
+		for (int i = 0; i < _flameSegments.length; i++)
+		{
+			last = i == _flameSegments.length - 1;
+			int xt = (int) (_x + xa * (i + 1));
+			int yt = (int) (_y + ya * (i + 1));
+			_flameSegments[i] = new FlameSegment(xt, yt, _direction, last);
+		}
 	}
 
 	/**
@@ -53,9 +69,9 @@ public class Flame extends Entity {
 	 */
 	private int calculatePermitedDistance() {
 		// TODO: thực hiện tính toán độ dài của Flame
-		return 1;
+		return 2;
 	}
-	
+
 	public FlameSegment flameSegmentAt(int x, int y) {
 		for (int i = 0; i < _flameSegments.length; i++) {
 			if(_flameSegments[i].getX() == x && _flameSegments[i].getY() == y)
@@ -66,7 +82,7 @@ public class Flame extends Entity {
 
 	@Override
 	public void update() {}
-	
+
 	@Override
 	public void render(Screen screen) {
 		for (int i = 0; i < _flameSegments.length; i++) {
@@ -77,6 +93,11 @@ public class Flame extends Entity {
 	@Override
 	public boolean collide(Entity e) {
 		// TODO: xử lý va chạm với Bomber, Enemy. Chú ý đối tượng này có vị trí chính là vị trí của Bomb đã nổ
+		System.out.println(e);
+		if(e instanceof Enemy) {
+			((Enemy)e).kill();
+		}
+
 		return true;
 	}
 }
