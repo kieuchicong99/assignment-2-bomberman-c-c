@@ -2,8 +2,7 @@ package uet.oop.bomberman.entities.bomb;
 
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.entities.Entity;
-import uet.oop.bomberman.entities.character.Bomber;
-import uet.oop.bomberman.entities.character.enemy.Enemy;
+import uet.oop.bomberman.entities.character.Character;
 import uet.oop.bomberman.graphics.Screen;
 
 public class Flame extends Entity {
@@ -44,23 +43,42 @@ public class Flame extends Entity {
 		/**
 		 * biến last dùng để đánh dấu cho segment cuối cùng
 		 */
-		boolean last;
+//		boolean last;
+//
+//		// TODO: tạo các segment dưới đây
+//		int xa = (int) _x;
+//		int ya = (int) _y;
+//
+//
+//		for (int i = 0; i < _flameSegments.length; i++)
+//		{
+//			last = i == _flameSegments.length -1 ? true : false;
+//			if 		(_direction == 0) ya = -1;
+//			else if (_direction == 1) xa =  1;
+//			else if (_direction == 2) ya =  1;
+//			else if (_direction == 3) xa = -1;
+//			_flameSegments[i] = new FlameSegment(xa, ya, _direction, last);
+//		}
+//
 
-		// TODO: tạo các segment dưới đây
-		int xa = 0;
-		int ya = 0;
-		if 		(_direction == 0) ya = -1;
-		else if (_direction == 1) xa =  1;
-		else if (_direction == 2) ya =  1;
-		else if (_direction == 3) xa = -1;
 
-		for (int i = 0; i < _flameSegments.length; i++)
-		{
-			last = i == _flameSegments.length - 1;
-			int xt = (int) (_x + xa * (i + 1));
-			int yt = (int) (_y + ya * (i + 1));
-			_flameSegments[i] = new FlameSegment(xt, yt, _direction, last);
+		boolean last = false;
+
+		int x = (int)_x;
+		int y = (int)_y;
+		for (int i = 0; i < _flameSegments.length; i++) {
+			last = i == _flameSegments.length -1 ? true : false;
+
+			switch (_direction) {
+				case 0: y--; break;
+				case 1: x++; break;
+				case 2: y++; break;
+				case 3: x--; break;
+			}
+			_flameSegments[i] = new FlameSegment(x, y, _direction, last, _board);
 		}
+
+
 	}
 
 	/**
@@ -94,8 +112,8 @@ public class Flame extends Entity {
 	public boolean collide(Entity e) {
 		// TODO: xử lý va chạm với Bomber, Enemy. Chú ý đối tượng này có vị trí chính là vị trí của Bomb đã nổ
 		System.out.println(e);
-		if(e instanceof Enemy) {
-			((Enemy)e).kill();
+		if(e instanceof Character) {
+			((Character)e).kill();
 		}
 
 		return true;

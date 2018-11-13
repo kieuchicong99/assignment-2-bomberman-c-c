@@ -5,6 +5,7 @@ import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.bomb.Bomb;
 import uet.oop.bomberman.entities.bomb.Flame;
+import uet.oop.bomberman.entities.bomb.FlameSegment;
 import uet.oop.bomberman.entities.character.enemy.Balloon;
 import uet.oop.bomberman.entities.character.enemy.Enemy;
 import uet.oop.bomberman.graphics.Screen;
@@ -181,16 +182,16 @@ public class Bomber extends Character {
 //        _x=
 //        _y=Coordinates.tileToPixel(Coordinates.pixelToTile(_y));
 
-        System.out.println(_x);
-        System.out.println(_y);
     }
 
     @Override
     public boolean collide(Entity e) {
         // TODO: xử lý va chạm với Flame
         // TODO: xử lý va chạm với Enemy
+
         System.out.println(e);
-        if (e instanceof Flame) {
+
+        if (e instanceof FlameSegment) {
             this.kill();
             return false;
         } else if (e instanceof Enemy) {
