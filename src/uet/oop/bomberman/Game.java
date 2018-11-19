@@ -3,11 +3,16 @@ package uet.oop.bomberman;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.gui.Frame;
 import uet.oop.bomberman.input.Keyboard;
+import uet.oop.bomberman.server.Server;
 
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.File;
+import java.net.URL;
 
 /**
  * Tạo vòng lặp cho game, lưu trữ một vài tham số cấu hình toàn cục,
@@ -49,6 +54,8 @@ public class Game extends Canvas {
 	
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
+
+	private String server="";
 	
 	public Game(Frame frame) {
 		_frame = frame;
@@ -56,7 +63,17 @@ public class Game extends Canvas {
 		
 		screen = new Screen(WIDTH, HEIGHT);
 		_input = new Keyboard();
-		
+
+
+		Runnable runnable = () -> {
+			Server.start(server);
+
+		};
+
+		Thread thread = new Thread(runnable);
+		thread.start();
+
+
 		_board = new Board(this, _input, screen);
 		addKeyListener(_input);
 	}
@@ -106,6 +123,7 @@ public class Game extends Canvas {
 	private void update() {
 		_input.update();
 		_board.update();
+		System.out.println(server);
 	}
 	
 	public void start() {

@@ -2,10 +2,13 @@ package uet.oop.bomberman.entities.bomb;
 
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.character.enemy.Enemy;
 import uet.oop.bomberman.entities.character.Character;
+import uet.oop.bomberman.entities.tile.destroyable.DestroyableTile;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.sound.Sound;
 
 
 public class FlameSegment extends Entity {
@@ -24,6 +27,18 @@ public class FlameSegment extends Entity {
 		_x = x;
 		_y = y;
 		_last = last;
+
+        Entity e = _board.getEntityAt(x, y);
+
+        if(e instanceof LayeredEntity) {
+            Entity top = ((LayeredEntity) e).getTopEntity();
+            if (top instanceof DestroyableTile) {
+                ((DestroyableTile) top).destroy();
+                Sound.play("destroy");
+            }
+        }
+
+            System.out.println(e);
 
 		switch (direction) {
 			case 0:
