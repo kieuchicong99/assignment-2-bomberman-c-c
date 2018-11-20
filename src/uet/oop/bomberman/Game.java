@@ -55,7 +55,7 @@ public class Game extends Canvas {
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 
-	private String server="";
+	private StringBuilder server=new StringBuilder();
 	
 	public Game(Frame frame) {
 		_frame = frame;
@@ -121,9 +121,41 @@ public class Game extends Canvas {
 	}
 
 	private void update() {
-		_input.update();
 		_board.update();
-		System.out.println(server);
+
+		char code='0';
+		if(server.length()>0){
+			code=server.charAt(0);
+		}
+		System.out.print(server);
+		_input.right=false;
+		_input.left=false;
+		_input.down=false;
+		_input.up=false;
+		switch (code){
+			case 'U':
+				_input.up=true;
+				break;
+			case 'D':
+				_input.down=true;
+				break;
+			case 'L':
+				_input.left=true;
+				break;
+			case 'R':
+				_input.right=true;
+				break;
+			case 'B':
+				_input.space=true;
+				break;
+			case '0':
+				_input.right=false;
+				_input.left=false;
+				_input.down=false;
+				_input.up=false;
+				_input.update();
+				break;
+		}
 	}
 	
 	public void start() {

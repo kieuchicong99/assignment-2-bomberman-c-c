@@ -13,7 +13,6 @@ public class Frame extends JFrame {
 	public GamePanel _gamepane;
 	private JPanel _containerpane;
 	private InfoPanel _infopanel;
-	
 	private Game _game;
 
 	public Frame() {
@@ -24,7 +23,7 @@ public class Frame extends JFrame {
 		
 		_containerpane.add(_infopanel, BorderLayout.PAGE_START);
 		_containerpane.add(_gamepane, BorderLayout.PAGE_END);
-		
+
 		_game = _gamepane.getGame();
 		
 		add(_containerpane);

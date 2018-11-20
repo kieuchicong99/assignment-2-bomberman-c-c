@@ -6,9 +6,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server extends Thread
-{
-    public static void start(String result){
+public class Server extends Thread {
+    public static void start(StringBuilder result) {
         try {
             ServerSocket serverSocket = new ServerSocket(1440);
             System.out.println("Waiting for client connect...");
@@ -21,8 +20,9 @@ public class Server extends Thread
                 dos = new DataOutputStream(socket.getOutputStream());
                 String string = dis.readUTF();
 
-                System.out.println(string);
-
+//                System.out.println(string);
+                result.delete(0, result.length());
+                result.append(string);
 
                 dos.flush();
                 dos.close();

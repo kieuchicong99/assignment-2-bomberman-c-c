@@ -112,6 +112,7 @@ public class Bomber extends Character {
 
     @Override
     public void kill() {
+        Sound.play("over");
         if (!_alive) return;
         _alive = false;
     }

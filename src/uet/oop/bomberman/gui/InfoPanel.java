@@ -12,6 +12,7 @@ public class InfoPanel extends JPanel {
 	
 	private JLabel timeLabel;
 	private JLabel pointsLabel;
+	private JLabel portLabel;
 
 	public InfoPanel(Game game) {
 		setLayout(new GridLayout());
@@ -23,10 +24,15 @@ public class InfoPanel extends JPanel {
 		pointsLabel = new JLabel("Points: " + game.getBoard().getPoints());
 		pointsLabel.setForeground(Color.white);
 		pointsLabel.setHorizontalAlignment(JLabel.CENTER);
-		
+
+		portLabel = new JLabel("Port: " + game.getBoard().getPoints());
+		portLabel.setForeground(Color.white);
+		portLabel.setHorizontalAlignment(JLabel.CENTER);
+
 		add(timeLabel);
 		add(pointsLabel);
-		
+		add(portLabel);
+
 		setBackground(Color.black);
 		setPreferredSize(new Dimension(0, 40));
 	}
