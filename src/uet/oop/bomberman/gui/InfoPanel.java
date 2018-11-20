@@ -4,49 +4,58 @@ import uet.oop.bomberman.Game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 /**
  * Swing Panel hiển thị thông tin thời gian, điểm mà người chơi đạt được
  */
 public class InfoPanel extends JPanel {
-	
-	private JLabel timeLabel;
-	private JLabel pointsLabel;
-	private JLabel portLabel;
 
-	public InfoPanel(Game game) {
-		setLayout(new GridLayout());
-		
-		timeLabel = new JLabel("Time: " + game.getBoard().getTime());
-		timeLabel.setForeground(Color.white);
-		timeLabel.setHorizontalAlignment(JLabel.CENTER);
-		
-		pointsLabel = new JLabel("Points: " + game.getBoard().getPoints());
-		pointsLabel.setForeground(Color.white);
-		pointsLabel.setHorizontalAlignment(JLabel.CENTER);
+    private JLabel timeLabel;
+    private JLabel pointsLabel;
+    private JLabel portLabel;
 
-		portLabel = new JLabel("Port: " + game.getPort());
-		portLabel.setForeground(Color.white);
-		portLabel.setHorizontalAlignment(JLabel.CENTER);
+    private String host = "";
 
-		add(timeLabel);
-		add(pointsLabel);
-		add(portLabel);
+    public InfoPanel(Game game) {
+        setLayout(new GridLayout());
+        try {
+            host = Inet4Address.getLocalHost().getHostAddress();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        timeLabel = new JLabel("Time: " + game.getBoard().getTime());
+        timeLabel.setForeground(Color.white);
+        timeLabel.setHorizontalAlignment(JLabel.CENTER);
 
-		setBackground(Color.black);
-		setPreferredSize(new Dimension(0, 40));
-	}
-	
-	public void setTime(int t) {
-		timeLabel.setText("Time: " + t);
-	}
+        pointsLabel = new JLabel("Points: " + game.getBoard().getPoints());
+        pointsLabel.setForeground(Color.white);
+        pointsLabel.setHorizontalAlignment(JLabel.CENTER);
 
-	public void setPoints(int t) {
-		pointsLabel.setText("Score: " + t);
-	}
+        portLabel = new JLabel("Address: " + host + ":" + game.getPort());
+        portLabel.setForeground(Color.white);
+        portLabel.setHorizontalAlignment(JLabel.CENTER);
 
-	public void setPort(int t) {
-		pointsLabel.setText("Port: " + t);
-	}
-	
+        add(timeLabel);
+        add(pointsLabel);
+        add(portLabel);
+
+        setBackground(Color.black);
+        setPreferredSize(new Dimension(0, 40));
+    }
+
+    public void setTime(int t) {
+        timeLabel.setText("Time: " + t);
+    }
+
+    public void setPoints(int t) {
+        pointsLabel.setText("Score: " + t);
+    }
+
+    public void setPort(int t) {
+        pointsLabel.setText("Address: " + host + ":" + t);
+    }
+
 }
