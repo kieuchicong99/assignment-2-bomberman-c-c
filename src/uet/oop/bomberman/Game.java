@@ -56,7 +56,17 @@ public class Game extends Canvas {
 	private int[] pixels = ((DataBufferInt)image.getRaster().getDataBuffer()).getData();
 
 	private StringBuilder server=new StringBuilder();
-	
+
+	private int port;
+
+	public int getPort() {
+		return port;
+	}
+
+	public void setPort(int port) {
+		this.port = port;
+	}
+
 	public Game(Frame frame) {
 		_frame = frame;
 		_frame.setTitle(TITLE);
@@ -66,8 +76,7 @@ public class Game extends Canvas {
 
 
 		Runnable runnable = () -> {
-			Server.start(server);
-
+			Server.start(server, this);
 		};
 
 		Thread thread = new Thread(runnable);

@@ -1,5 +1,7 @@
 package uet.oop.bomberman.server;
 
+import uet.oop.bomberman.Game;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -7,9 +9,20 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class Server extends Thread {
-    public static void start(StringBuilder result) {
+    public static void start(StringBuilder result, Game game) {
+        ServerSocket serverSocket = null;
+        int port=1410;
+        while (true) {
+            try {
+                serverSocket = new ServerSocket(port);
+                game.setPort(port);
+                break;
+            } catch (Exception e) {
+                port++;
+            }
+        }
+
         try {
-            ServerSocket serverSocket = new ServerSocket(1440);
             System.out.println("Waiting for client connect...");
             DataInputStream dis = null;
             DataOutputStream dos = null;

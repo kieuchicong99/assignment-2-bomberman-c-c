@@ -25,7 +25,7 @@ public class InfoPanel extends JPanel {
 		pointsLabel.setForeground(Color.white);
 		pointsLabel.setHorizontalAlignment(JLabel.CENTER);
 
-		portLabel = new JLabel("Port: " + game.getBoard().getPoints());
+		portLabel = new JLabel("Port: " + game.getPort());
 		portLabel.setForeground(Color.white);
 		portLabel.setHorizontalAlignment(JLabel.CENTER);
 
@@ -43,6 +43,10 @@ public class InfoPanel extends JPanel {
 
 	public void setPoints(int t) {
 		pointsLabel.setText("Score: " + t);
+	}
+
+	public void setPort(int t) {
+		pointsLabel.setText("Port: " + t);
 	}
 	
 }
