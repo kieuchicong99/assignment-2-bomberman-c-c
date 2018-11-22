@@ -5,6 +5,7 @@ import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.character.enemy.Balloon;
+import uet.oop.bomberman.entities.character.enemy.Oneal;
 import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.entities.tile.destroyable.Brick;
 import uet.oop.bomberman.entities.tile.item.FlameItem;
@@ -128,15 +129,35 @@ public class FileLevelLoader extends LevelLoader {
                                 new LayeredEntity(x, y,
                                         new Grass(x, y, Sprite.grass),
                                         new FlameItem(x, y, Sprite.powerup_flames)
-//                                        ,
-//                                        new Brick(x, y, Sprite.brick)
+                                        ,
+                                        new Brick(x, y, Sprite.brick)
+                                )
+                        );
+                        break;
+                    case 'b':
+                        _board.addEntity(pos,
+                                new LayeredEntity(x, y,
+                                        new Grass(x, y, Sprite.grass),
+                                        new FlameItem(x, y, Sprite.powerup_bombs)
+                                        ,
+                                        new Brick(x, y, Sprite.brick)
+                                )
+                        );
+                        break;
+                    case 's':
+                        _board.addEntity(pos,
+                                new LayeredEntity(x, y,
+                                        new Grass(x, y, Sprite.grass),
+                                        new FlameItem(x, y, Sprite.powerup_speed)
+                                        ,
+                                        new Brick(x, y, Sprite.brick)
                                 )
                         );
                         break;
 
                     case '2':
-                        sprite = Sprite.oneal_left1;
-                        _board.addEntity(pos, new Grass(x, y, sprite));
+                        _board.addCharacter(new Oneal(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
+                        _board.addEntity(x + y * _width, new Grass(x, y, Sprite.grass));
                         break;
 
                     default:
