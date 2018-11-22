@@ -120,9 +120,8 @@ public class FileLevelLoader extends LevelLoader {
                         _board.addEntity(xBomber + yBomber * _width, new Grass(xBomber, yBomber, Sprite.grass));
                         break;
                     case '1':
-                        int xE = x, yE = y;
-                        _board.addCharacter(new Balloon(Coordinates.tileToPixel(xE), Coordinates.tileToPixel(yE) + Game.TILES_SIZE, _board));
-                        _board.addEntity(xE + yE * _width, new Grass(xE, yE, Sprite.grass));
+                        _board.addCharacter(new Balloon(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
+                        _board.addEntity(x + y * _width, new Grass(x, y, Sprite.grass));
                         break;
                     case 'f':
                         _board.addEntity(pos,
