@@ -65,13 +65,12 @@ public class Flame extends Entity {
 //		}
 //
 
+			boolean last = false;
 
-		boolean last = false;
-
-		int x = (int)_x;
-		int y = (int)_y;
-		for (int i = 0; i < _flameSegments.length; i++) {
-			last = i == _flameSegments.length -1 ? true : false;
+			int x = (int)_x;
+			int y = (int)_y;
+			for (int i = 0; i < calculatePermitedDistance(); i++) {
+				last = i == calculatePermitedDistance() -1 ? true : false;
 
 			switch (_direction) {
 				case 0: y--; break;
@@ -92,9 +91,34 @@ public class Flame extends Entity {
 	 */
 	private int calculatePermitedDistance() {
 		// TODO: thực hiện tính toán độ dài của Flame
-		_radius= Game.getBombRadius();
-
-		return _radius;
+		_radius= 2;
+		double x=_x;
+		double y=_y;
+		int i;
+		for ( i=0;i < Game.getBombRadius(); i++) {
+            switch (_direction) {
+                case 0:
+                    y--;
+                    break;
+                case 1:
+                    x++;
+                    break;
+                case 2:
+                    y++;
+                    break;
+                case 3:
+                    x--;
+                    break;
+            }
+            Entity e=_board.getEntityAt(x,y);
+            System.out.println(e);
+            if(e instanceof Wall) break;
+            else  if(e instanceof LayeredEntity){
+                i++;
+                break;
+            }
+        }
+        return i;
 	}
 
 	public FlameSegment flameSegmentAt(int x, int y) {

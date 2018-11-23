@@ -7,6 +7,7 @@ import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.character.enemy.Balloon;
 import uet.oop.bomberman.entities.character.enemy.Oneal;
 import uet.oop.bomberman.entities.tile.Grass;
+import uet.oop.bomberman.entities.tile.Wall;
 import uet.oop.bomberman.entities.tile.destroyable.Brick;
 import uet.oop.bomberman.entities.tile.item.FlameItem;
 import uet.oop.bomberman.entities.tile.item.SpeedItem;
@@ -98,7 +99,7 @@ public class FileLevelLoader extends LevelLoader {
                 switch (_map[y][x]) {
                     case '#':
                         sprite = Sprite.wall;
-                        _board.addEntity(pos, new Grass(x, y, sprite));
+                        _board.addEntity(pos, new Wall(x, y, sprite));
                         break;
                     case '*':
                         int xB = x, yB = y;

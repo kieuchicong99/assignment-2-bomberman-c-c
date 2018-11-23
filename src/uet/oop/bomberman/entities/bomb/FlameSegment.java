@@ -30,6 +30,8 @@ public class FlameSegment extends Entity {
 
         Entity e = _board.getEntityAt(x, y);
 
+		System.out.println(e);
+
         if(e instanceof LayeredEntity) {
             Entity top = ((LayeredEntity) e).getTopEntity();
             if (top instanceof DestroyableTile) {
