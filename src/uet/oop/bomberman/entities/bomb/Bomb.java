@@ -4,6 +4,7 @@ import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.AnimatedEntitiy;
 import uet.oop.bomberman.entities.Entity;
+import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 
@@ -76,6 +77,11 @@ public class Bomb extends AnimatedEntitiy {
 		_exploded = true;
 
 		// TODO: xử lý khi Character đứng tại vị trí Bomb
+
+		Entity e = _board.getCharacterAtExcluding((int)_x,(int)_y,null);
+		if(e instanceof Bomber){
+			((Bomber) e).kill();
+		}
 
 		// TODO: tạo các Flame
 		_flames = new Flame[4];

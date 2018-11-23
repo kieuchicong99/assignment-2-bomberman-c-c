@@ -38,7 +38,7 @@ public class FlameSegment extends Entity {
             }
         }
 
-            System.out.println(e);
+//            System.out.println(e);
 
 		switch (direction) {
 			case 0:

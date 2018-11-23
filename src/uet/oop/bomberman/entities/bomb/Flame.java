@@ -5,6 +5,7 @@ import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.character.Character;
+import uet.oop.bomberman.entities.character.enemy.Enemy;
 import uet.oop.bomberman.entities.tile.Wall;
 import uet.oop.bomberman.entities.tile.destroyable.DestroyableTile;
 import uet.oop.bomberman.graphics.Screen;
@@ -47,7 +48,6 @@ public class Flame extends Entity {
 		/**
 		 * biến last dùng để đánh dấu cho segment cuối cùng
 		 */
-//		boolean last;
 //
 //		// TODO: tạo các segment dưới đây
 //		int xa = (int) _x;
@@ -79,6 +79,7 @@ public class Flame extends Entity {
 				case 2: y++; break;
 				case 3: x--; break;
 			}
+
 			_flameSegments[i] = new FlameSegment(x, y, _direction, last, _board);
 		}
 
@@ -118,10 +119,9 @@ public class Flame extends Entity {
 	public boolean collide(Entity e) {
 		// TODO: xử lý va chạm với Bomber, Enemy. Chú ý đối tượng này có vị trí chính là vị trí của Bomb đã nổ
 		System.out.println(e);
-		if(e instanceof Character) {
-			((Character)e).kill();
+		if(e instanceof Character || e instanceof Enemy) {
+			((Character) e).kill();
 		}
-
 		return true;
 	}
 }
