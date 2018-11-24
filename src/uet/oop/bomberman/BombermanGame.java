@@ -10,6 +10,7 @@ import java.net.URL;
 public class BombermanGame {
 	
 	public static void main(String[] args) {
+
 		Sound.play("background");
 		new Frame();
 	}
