@@ -36,6 +36,7 @@ public class Board implements IRender {
 	
 	private int _time = Game.TIME;
 	private int _points = Game.POINTS;
+
 	
 	public Board(Game game, Keyboard input, Screen screen) {
 		_game = game;
