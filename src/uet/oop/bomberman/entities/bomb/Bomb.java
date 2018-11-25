@@ -7,6 +7,7 @@ import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
+import uet.oop.bomberman.sound.Sound;
 
 public class Bomb extends AnimatedEntitiy {
 
@@ -75,6 +76,7 @@ public class Bomb extends AnimatedEntitiy {
      */
 	protected void explode() {
 		_exploded = true;
+		Sound.play("destroy");
 
 		// TODO: xử lý khi Character đứng tại vị trí Bomb
 

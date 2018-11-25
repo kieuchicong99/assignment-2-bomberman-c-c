@@ -36,7 +36,6 @@ public class FlameSegment extends Entity {
             Entity top = ((LayeredEntity) e).getTopEntity();
             if (top instanceof DestroyableTile) {
                 ((DestroyableTile) top).destroy();
-                Sound.play("destroy");
             }
         }
 
