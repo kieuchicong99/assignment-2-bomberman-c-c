@@ -2,6 +2,7 @@ package uet.oop.bomberman.level;
 
 import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
+import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.character.enemy.Balloon;
@@ -9,6 +10,7 @@ import uet.oop.bomberman.entities.character.enemy.Oneal;
 import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.entities.tile.Wall;
 import uet.oop.bomberman.entities.tile.destroyable.Brick;
+import uet.oop.bomberman.entities.tile.item.BombItem;
 import uet.oop.bomberman.entities.tile.item.FlameItem;
 import uet.oop.bomberman.entities.tile.item.SpeedItem;
 import uet.oop.bomberman.exceptions.LoadLevelException;
@@ -103,11 +105,8 @@ public class FileLevelLoader extends LevelLoader {
                         break;
                     case '*':
                         int xB = x, yB = y;
-                        _board.addEntity(xB + yB * _width,
-                                new LayeredEntity(xB, yB,
-                                        new Grass(xB, yB, Sprite.grass),
-                                        new Brick(xB, yB, Sprite.brick)
-                                )
+                        Entity[] e = {new Grass(xB, yB, Sprite.grass),  new Brick(xB, yB, Sprite.brick)};
+                        _board.addEntity(xB + yB * _width, new LayeredEntity(xB, yB, e)
                         );
                         break;
                     case 'x':
@@ -125,34 +124,17 @@ public class FileLevelLoader extends LevelLoader {
                         _board.addEntity(x + y * _width, new Grass(x, y, Sprite.grass));
                         break;
                     case 'f':
-                        _board.addEntity(pos,
-                                new LayeredEntity(x, y,
-                                        new Grass(x, y, Sprite.grass),
-                                        new FlameItem(x, y, Sprite.powerup_flames)
-                                        ,
-                                        new Brick(x, y, Sprite.brick)
-                                )
+                        Entity[] e1 = {new Grass(x, y, Sprite.grass), new FlameItem(x, y, Sprite.powerup_flames), new Brick(x, y, Sprite.brick)};
+                        _board.addEntity(pos, new LayeredEntity(x, y, e1 )
                         );
                         break;
                     case 'b':
-                        _board.addEntity(pos,
-                                new LayeredEntity(x, y,
-                                        new Grass(x, y, Sprite.grass),
-                                        new FlameItem(x, y, Sprite.powerup_bombs)
-                                        ,
-                                        new Brick(x, y, Sprite.brick)
-                                )
-                        );
+                        Entity[] e2 = {new Grass(x, y, Sprite.grass), new BombItem(x, y, Sprite.powerup_bombs), new Brick(x, y, Sprite.brick)};
+                        _board.addEntity(pos, new LayeredEntity(x, y, e2));
                         break;
                     case 's':
-                        _board.addEntity(pos,
-                                new LayeredEntity(x, y,
-                                        new Grass(x, y, Sprite.grass),
-                                        new FlameItem(x, y, Sprite.powerup_speed)
-                                        ,
-                                        new Brick(x, y, Sprite.brick)
-                                )
-                        );
+                        Entity[] e3 = {new Grass(x, y, Sprite.grass),  new SpeedItem(x, y, Sprite.powerup_speed),  new Brick(x, y, Sprite.brick)};
+                        _board.addEntity(pos, new LayeredEntity(x, y,e3 ) );
                         break;
 
                     case '2':

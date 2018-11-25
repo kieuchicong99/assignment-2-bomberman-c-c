@@ -10,6 +10,10 @@ import uet.oop.bomberman.entities.bomb.FlameSegment;
 import uet.oop.bomberman.entities.character.enemy.Balloon;
 import uet.oop.bomberman.entities.character.enemy.Enemy;
 import uet.oop.bomberman.entities.tile.Grass;
+import uet.oop.bomberman.entities.tile.item.BombItem;
+import uet.oop.bomberman.entities.tile.item.FlameItem;
+import uet.oop.bomberman.entities.tile.item.Item;
+import uet.oop.bomberman.entities.tile.item.SpeedItem;
 import uet.oop.bomberman.graphics.Screen;
 import uet.oop.bomberman.graphics.Sprite;
 import uet.oop.bomberman.input.Keyboard;
@@ -17,6 +21,7 @@ import uet.oop.bomberman.level.Coordinates;
 import uet.oop.bomberman.sound.Sound;
 import uet.oop.bomberman.sound.Walk;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -30,6 +35,7 @@ public class Bomber extends Character {
      * cứ mỗi lần đặt 1 Bomb mới, giá trị này sẽ được reset về 0 và giảm dần trong mỗi lần update()
      */
     protected int _timeBetweenPutBombs = 0;
+    public static ArrayList<Item> _items = new ArrayList<Item>();
 
     public Bomber(int x, int y, Board board) {
         super(x, y, board);
@@ -83,9 +89,10 @@ public class Bomber extends Character {
         // TODO: nếu 3 điều kiện trên thỏa mãn thì thực hiện đặt bom bằng placeBomb()
         // TODO: sau khi đặt, nhớ giảm số lượng Bomb Rate và reset _timeBetweenPutBombs về 0
         if (_input.space && _timeBetweenPutBombs < 0 && Game.getBombRate() > 0) {
+
             placeBomb(getXTile(), getYTile());
-            _timeBetweenPutBombs = 0;
             Game.addBombRate(-1);
+            _timeBetweenPutBombs = 40;
         }
     }
 
@@ -189,7 +196,6 @@ public class Bomber extends Character {
         // TODO: xử lý va chạm với Flame
         // TODO: xử lý va chạm với Enemy
 
-//        System.out.println(e);
 
         if (e instanceof FlameSegment) {
             this.kill();
@@ -202,6 +208,19 @@ public class Bomber extends Character {
         }else if(e instanceof LayeredEntity){
             if(((LayeredEntity) e).getTopEntity() instanceof Grass)
                 return true;
+            else if (((LayeredEntity) e).getTopEntity() instanceof SpeedItem){
+                System.out.println("speed item");
+                return ((LayeredEntity) e).getTopEntity().collide(this);
+//                remove();
+            }
+            else if (((LayeredEntity) e).getTopEntity() instanceof BombItem){
+                System.out.println("bomb item");
+                return ((LayeredEntity) e).getTopEntity().collide(this);
+            }
+            else if (((LayeredEntity) e).getTopEntity() instanceof FlameItem){
+                System.out.println("flame item");
+                return ((LayeredEntity) e).getTopEntity().collide(this);
+            }
             else return false;
         }
         else if (e.getSprite() == Sprite.wall) {
@@ -212,6 +231,32 @@ public class Bomber extends Character {
         }
 
         return true;
+
+
+    }
+
+    /**
+     * Item
+     */
+    public void addItem(Item item){
+        if(item.isRemoved()) return ;
+        item.setValues();
+        _items.add(item);
+
+    }
+    public void clearUsedItems() {
+        Item p;
+        for (int i = 0; i < _items.size(); i++) {
+            p = _items.get(i);
+            if(p.isActive() == false)
+                _items.remove(i);
+        }
+    }
+
+    public void removeItems() {
+        for (int i = 0; i < _items.size(); i++) {
+            _items.remove(i);
+        }
     }
 
     /**

@@ -222,14 +222,15 @@ public class Game extends Canvas {
 		return bombRate;
 	}
 	
-	public static int getBombRadius() {
+	public static int getBombRadius()
+	{
 		return bombRadius;
 	}
 	
 	public static void addBomberSpeed(double i) {
 		bomberSpeed += i;
 	}
-	
+
 	public static void addBombRadius(int i) {
 		bombRadius += i;
 	}

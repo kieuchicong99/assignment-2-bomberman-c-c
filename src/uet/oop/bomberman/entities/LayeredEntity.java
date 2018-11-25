@@ -1,8 +1,10 @@
 package uet.oop.bomberman.entities;
 
+
 import uet.oop.bomberman.entities.tile.destroyable.DestroyableTile;
 import uet.oop.bomberman.graphics.Screen;
 
+import java.sql.SQLOutput;
 import java.util.LinkedList;
 
 /**
@@ -10,16 +12,16 @@ import java.util.LinkedList;
  * Ví dụ: tại vị trí dấu Item, có 3 Entity [Grass, Item, Brick]
  */
 public class LayeredEntity extends Entity {
+
 	
-	protected LinkedList<Entity> _entities = new LinkedList<>();
+	protected LinkedList<Entity> _entities = new LinkedList<Entity>();
 	
-	public LayeredEntity(int x, int y, Entity ... entities) {
+	public LayeredEntity(int x, int y, Entity[] entities) {
 		_x = x;
 		_y = y;
 		
 		for (int i = 0; i < entities.length; i++) {
-			_entities.add(entities[i]); 
-			
+			_entities.add(entities[i]);
 			if(i > 1) {
 				if(entities[i] instanceof DestroyableTile)
 					((DestroyableTile)entities[i]).addBelowSprite(entities[i-1].getSprite());
@@ -44,8 +46,8 @@ public class LayeredEntity extends Entity {
 	}
 	
 	private void clearRemoved() {
+
 		Entity top  = getTopEntity();
-		
 		if(top.isRemoved())  {
 			_entities.removeLast();
 		}
@@ -58,7 +60,9 @@ public class LayeredEntity extends Entity {
 	@Override
 	public boolean collide(Entity e) {
 		// TODO: lấy entity trên cùng ra để xử lý va chạm
-		return false;
+
+//		System.out.println("111111111");
+		return getTopEntity().collide(e);
 	}
 
 }
