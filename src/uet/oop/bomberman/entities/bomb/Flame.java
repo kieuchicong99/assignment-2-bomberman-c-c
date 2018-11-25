@@ -7,6 +7,7 @@ import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.character.Character;
 import uet.oop.bomberman.entities.character.enemy.Enemy;
+import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.entities.tile.Wall;
 import uet.oop.bomberman.entities.tile.destroyable.DestroyableTile;
 import uet.oop.bomberman.graphics.Screen;
@@ -119,7 +120,9 @@ public class Flame extends Entity {
 				if (top instanceof DestroyableTile) {
 					((DestroyableTile) top).destroy();
 				}
-                break;
+				if (!(top instanceof Grass)) {
+					break;
+				}
             }
         }
         return i;
