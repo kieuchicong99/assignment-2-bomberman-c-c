@@ -152,6 +152,8 @@ public class Flame extends Entity {
 		}
 		else if(e instanceof Bomber)
 				e.collide(this);
+		//else if( e instanceof Bomb)
+			//((Bomb) e).
 		return true;
 	}
 }

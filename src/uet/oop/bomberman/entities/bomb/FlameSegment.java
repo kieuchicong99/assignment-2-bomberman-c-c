@@ -89,6 +89,9 @@ public class FlameSegment extends Entity {
 		if (e instanceof Character){
 			((Character) e).kill();
 		}
+		else if (e instanceof Bomb){
+			((Bomb) e).explode();
+		}
 		return true;
 	}
 
