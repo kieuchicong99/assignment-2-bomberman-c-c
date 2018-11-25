@@ -115,7 +115,10 @@ public class Flame extends Entity {
             System.out.println(e);
             if(e instanceof Wall) break;
             else  if(e instanceof LayeredEntity){
-                i++;
+				Entity top = ((LayeredEntity) e).getTopEntity();
+				if (top instanceof DestroyableTile) {
+					((DestroyableTile) top).destroy();
+				}
                 break;
             }
         }
