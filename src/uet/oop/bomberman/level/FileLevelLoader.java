@@ -8,6 +8,7 @@ import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.character.enemy.Balloon;
 import uet.oop.bomberman.entities.character.enemy.Oneal;
 import uet.oop.bomberman.entities.tile.Grass;
+import uet.oop.bomberman.entities.tile.Portal;
 import uet.oop.bomberman.entities.tile.Wall;
 import uet.oop.bomberman.entities.tile.destroyable.Brick;
 import uet.oop.bomberman.entities.tile.item.BombItem;
@@ -110,8 +111,8 @@ public class FileLevelLoader extends LevelLoader {
                         );
                         break;
                     case 'x':
-                        sprite = Sprite.portal;
-                        _board.addEntity(pos, new Grass(x, y, sprite));
+                        Entity[] ex = {new Grass(x ,y, Sprite.grass),new Portal(x ,y, _board, Sprite.portal),new Brick(x ,y, Sprite.brick)};
+                        _board.addEntity(pos, new LayeredEntity(x, y,ex));
                         break;
                     case 'p':
                         int xBomber = x, yBomber = y;

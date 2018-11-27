@@ -10,6 +10,7 @@ import uet.oop.bomberman.entities.bomb.FlameSegment;
 import uet.oop.bomberman.entities.character.enemy.Balloon;
 import uet.oop.bomberman.entities.character.enemy.Enemy;
 import uet.oop.bomberman.entities.tile.Grass;
+import uet.oop.bomberman.entities.tile.Portal;
 import uet.oop.bomberman.entities.tile.item.BombItem;
 import uet.oop.bomberman.entities.tile.item.FlameItem;
 import uet.oop.bomberman.entities.tile.item.Item;
@@ -219,6 +220,10 @@ public class Bomber extends Character {
             }
             else if (((LayeredEntity) e).getTopEntity() instanceof FlameItem){
                 System.out.println("flame item");
+                return ((LayeredEntity) e).getTopEntity().collide(this);
+            }
+            else if (((LayeredEntity) e).getTopEntity() instanceof Portal){
+                System.out.println("PORTAL");
                 return ((LayeredEntity) e).getTopEntity().collide(this);
             }
             else return false;
