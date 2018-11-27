@@ -26,8 +26,9 @@ public class Game extends Canvas {
 
 	public static int SCALE = 3;
 	
-	public static final String TITLE = "BombermanGame";
-	
+	public static final String TITLE = "Bomberman";
+
+	public static final int LIVES = 3;
 	private static final int BOMBRATE = 1;
 	private static final int BOMBRADIUS = 1;
 	private static final double BOMBERSPEED = 1.0;
@@ -66,6 +67,7 @@ public class Game extends Canvas {
 	public void setPort(int port) {
 		this.port = port;
 	}
+
 
 	public Game(Frame frame) {
 		_frame = frame;
@@ -204,7 +206,7 @@ public class Game extends Canvas {
 				_frame.setTime(_board.subtractTime());
 				_frame.setPoints(_board.getPoints());
 				timer += 1000;
-				_frame.setTitle(TITLE + " | " + updates + " rate, " + frames + " fps");
+				_frame.setTitle(TITLE);
 				updates = 0;
 				frames = 0;
 				

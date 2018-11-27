@@ -37,6 +37,9 @@ public class Board implements IRender {
 	private int _time = Game.TIME;
 	private int _points = Game.POINTS;
 
+	// số mạng trong 1 lần chơi
+	private int _lives = Game.LIVES;
+
 	
 	public Board(Game game, Keyboard input, Screen screen) {
 		_game = game;
@@ -45,7 +48,21 @@ public class Board implements IRender {
 		
 		loadLevel(1); //start in level 1
 	}
-	
+	private void resetProperties() {
+		_points = Game.POINTS;
+		_lives = Game.LIVES;
+		Bomber._items.clear();
+
+		_game.bomberSpeed = 1.0;
+		_game.bombRadius = 1;
+		_game.bombRate = 1;
+
+	}
+	public void newGame() {
+		resetProperties();
+		loadLevel(1);
+	}
+
 	@Override
 	public void update() {
 		if( _game.isPaused() ) return;
@@ -331,6 +348,14 @@ public class Board implements IRender {
 
 	public void setShow(int i) {
 		_screenToShow = i;
+	}
+
+	public void setLives(){
+		this._lives -= 1;
+
+	}
+	public int getLives() {
+		return _lives;
 	}
 
 	public int getTime() {

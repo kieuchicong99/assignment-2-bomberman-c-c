@@ -15,6 +15,7 @@ public class InfoPanel extends JPanel {
 
     private JLabel timeLabel;
     private JLabel pointsLabel;
+    private JLabel livesLabel;
     private JLabel portLabel;
 
     private String host = "";
@@ -34,6 +35,10 @@ public class InfoPanel extends JPanel {
         pointsLabel.setForeground(Color.white);
         pointsLabel.setHorizontalAlignment(JLabel.CENTER);
 
+        livesLabel = new JLabel("♥: " + game.getBoard().getLives());
+        livesLabel.setForeground(Color.white);
+        livesLabel.setHorizontalAlignment(JLabel.CENTER);
+
         portLabel = new JLabel("Address: " + host + ":" + game.getPort());
         portLabel.setForeground(Color.white);
         portLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -41,6 +46,7 @@ public class InfoPanel extends JPanel {
         add(timeLabel);
         add(pointsLabel);
         add(portLabel);
+        add(livesLabel);
 
         setBackground(Color.black);
         setPreferredSize(new Dimension(0, 40));
@@ -52,6 +58,10 @@ public class InfoPanel extends JPanel {
 
     public void setPoints(int t) {
         pointsLabel.setText("Score: " + t);
+    }
+
+    public void setLives(int t){
+        livesLabel.setText("♥: "+t);
     }
 
     public void setPort(int t) {
