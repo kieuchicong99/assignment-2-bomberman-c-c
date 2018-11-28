@@ -1,6 +1,6 @@
-# Bài tập lớn OOP - Bomberman Game
-**Author:** 
-<li>Trần Mạnh Cường
-<li>Kiều Chí Công
+# Bài tập lớn OOP - Bomberman Game  
 
-<img src="res/screenshot.png" alt="drawing" width="400"/>
+  **Author:**
+ - Trần Mạnh Cường   
+ - Kiều Chí Công
+<img src="res/screenshot.png" alt="drawing" width="600"/>
