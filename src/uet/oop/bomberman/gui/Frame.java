@@ -44,9 +44,10 @@ public class Frame extends JFrame {
 	public void setTime(int time) {
 		_infopanel.setTime(time);
 	}
-	
+
 	public void setPoints(int points) {
 		_infopanel.setPoints(points);
 	}
+	public void setLives(int lives){_infopanel.setLives(lives);}
 	
 }

@@ -103,7 +103,9 @@ public class Board implements IRender {
 	public void nextLevel() {
 		loadLevel(_levelLoader.getLevel() + 1);
 	}
-	
+	public void restartLevel() {
+		loadLevel(_levelLoader.getLevel());
+	}
 	public void loadLevel(int level) {
 		_time = Game.TIME;
 		_screenToShow = 2;

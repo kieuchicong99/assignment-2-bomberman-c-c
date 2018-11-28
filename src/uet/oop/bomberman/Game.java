@@ -205,6 +205,7 @@ public class Game extends Canvas {
 			if(System.currentTimeMillis() - timer > 1000) {
 				_frame.setTime(_board.subtractTime());
 				_frame.setPoints(_board.getPoints());
+				_frame.setLives(_board.getLives());
 				timer += 1000;
 				_frame.setTitle(TITLE);
 				updates = 0;

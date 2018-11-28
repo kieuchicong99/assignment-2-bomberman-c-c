@@ -4,6 +4,7 @@ import uet.oop.bomberman.Board;
 import uet.oop.bomberman.Game;
 import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.LayeredEntity;
+import uet.oop.bomberman.entities.Message;
 import uet.oop.bomberman.entities.bomb.Bomb;
 import uet.oop.bomberman.entities.bomb.Flame;
 import uet.oop.bomberman.entities.bomb.FlameSegment;
@@ -22,6 +23,7 @@ import uet.oop.bomberman.level.Coordinates;
 import uet.oop.bomberman.sound.Sound;
 import uet.oop.bomberman.sound.Walk;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -120,16 +122,27 @@ public class Bomber extends Character {
 
     @Override
     public void kill() {
-        Sound.play("gameover");
+
         if (!_alive) return;
         _alive = false;
+        _board.setLives();
+        if (_board.getLives()==0)Sound.play("gameover");
+        else Sound.play("die");
+        Message msg = new Message(" - ♥", getXMessage(), getYMessage(), 2, Color.white, 60);
+        _board.addMessage(msg);
     }
 
     @Override
     protected void afterKill() {
-        if (_timeAfter > 0) --_timeAfter;
+        if(_timeAfter > 0) --_timeAfter;
         else {
-            _board.endGame();
+            if(_bombs.size() == 0) {
+
+                if(_board.getLives() == 0)
+                    _board.endGame();
+                else
+                    _board.restartLevel();
+            }
         }
     }
 
