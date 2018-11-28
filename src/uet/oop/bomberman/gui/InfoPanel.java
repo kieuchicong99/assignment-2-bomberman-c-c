@@ -39,7 +39,7 @@ public class InfoPanel extends JPanel {
         livesLabel.setForeground(Color.white);
         livesLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        portLabel = new JLabel("Address: " + host + ":" + game.getPort());
+        portLabel = new JLabel("IP: " + host + ":" + game.getPort());
         portLabel.setForeground(Color.white);
         portLabel.setHorizontalAlignment(JLabel.CENTER);
 
@@ -65,7 +65,7 @@ public class InfoPanel extends JPanel {
     }
 
     public void setPort(int t) {
-        pointsLabel.setText("Address: " + host + ":" + t);
+        pointsLabel.setText("IP: " + host + ":" + t);
     }
 
 }
