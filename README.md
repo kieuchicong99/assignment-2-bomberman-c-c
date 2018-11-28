@@ -1,3 +1,3 @@
 # Bài tập lớn OOP - Bomberman Game
 
-<img src="res/demo.png" alt="drawing" width="400"/>
+<img src="res/screenshot.png" alt="drawing" width="400"/>
