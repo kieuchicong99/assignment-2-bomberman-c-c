@@ -22,8 +22,10 @@ import uet.oop.bomberman.input.Keyboard;
 import uet.oop.bomberman.level.Coordinates;
 import uet.oop.bomberman.sound.Sound;
 import uet.oop.bomberman.sound.Walk;
+import uet.oop.bomberman.gui.menu.HighScore;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -126,7 +128,10 @@ public class Bomber extends Character {
         if (!_alive) return;
         _alive = false;
         _board.setLives();
-        if (_board.getLives()==0)Sound.play("gameover");
+        if (_board.getLives()==0){
+            Sound.play("gameover");
+        }
+
         else Sound.play("die");
         Message msg = new Message(" - ♥", getXMessage(), getYMessage(), 2, Color.white, 60);
         _board.addMessage(msg);
@@ -138,8 +143,18 @@ public class Bomber extends Character {
         else {
             if(_bombs.size() == 0) {
 
-                if(_board.getLives() == 0)
-                    _board.endGame();
+                if(_board.getLives() == 0){
+                    try{
+                        HighScore.SetHighScoreToFile(_board.getGame());
+                    }
+                    catch (IOException exception) {
+                        System.out.println("ERROR WHEN OPEN HIGH SCORE FILE!");
+                    }
+                    finally {
+                        _board.endGame();
+                    }
+                }
+
                 else
                     _board.restartLevel();
             }

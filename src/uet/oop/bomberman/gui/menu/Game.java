@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
 public class Game extends JMenu {
 
@@ -48,7 +49,12 @@ public class Game extends JMenu {
 			  }
 			  
 			  if(e.getActionCommand().equals("Top Scores")) {
-				  new InfoDialog(_frame, "Top Scores", "If i had more time..", JOptionPane.INFORMATION_MESSAGE);
+			  	try{
+				  new InfoDialog(_frame, "Top Scores", HighScore.GetHighScoreFromFile(_frame.getGame()), JOptionPane.INFORMATION_MESSAGE);
+			  	}
+			  	catch (IOException exception){
+                    System.out.println("ERROR WHEN OPEN HIGH SCORE FILE!");
+				}
 			  }
 
 

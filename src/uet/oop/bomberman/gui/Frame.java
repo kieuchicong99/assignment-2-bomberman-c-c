@@ -37,6 +37,9 @@ public class Frame extends JFrame {
 		
 		_game.start();
 	}
+	public Game getGame(){
+		return _game;
+	}
 	public void newGame() {
 		_game.getBoard().newGame();
 	}
