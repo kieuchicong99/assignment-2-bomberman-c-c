@@ -7,6 +7,9 @@ import uet.oop.bomberman.entities.LayeredEntity;
 import uet.oop.bomberman.entities.character.Bomber;
 import uet.oop.bomberman.entities.character.enemy.Balloon;
 import uet.oop.bomberman.entities.character.enemy.Oneal;
+import uet.oop.bomberman.entities.character.enemy.Doll;
+import uet.oop.bomberman.entities.character.enemy.Kondoria;
+import uet.oop.bomberman.entities.character.enemy.Minvo;
 import uet.oop.bomberman.entities.tile.Grass;
 import uet.oop.bomberman.entities.tile.Portal;
 import uet.oop.bomberman.entities.tile.Wall;
@@ -142,23 +145,24 @@ public class FileLevelLoader extends LevelLoader {
                         _board.addCharacter(new Oneal(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
                         _board.addEntity(x + y * _width, new Grass(x, y, Sprite.grass));
                         break;
-
+                    case '3':
+                        _board.addCharacter( new Doll(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
+                        _board.addEntity(pos, new Grass(x, y, Sprite.grass) );
+                        break;
+                    case '4':
+                        _board.addCharacter( new Minvo(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
+                        _board.addEntity(pos, new Grass(x, y, Sprite.grass) );
+                        break;
+                    case '5':
+                        _board.addCharacter( new Kondoria(Coordinates.tileToPixel(x), Coordinates.tileToPixel(y) + Game.TILES_SIZE, _board));
+                        _board.addEntity(pos, new Grass(x, y, Sprite.grass) );
+                        break;
                     default:
                         _board.addEntity(pos, new Grass(x, y, sprite));
                         break;
                 }
             }
         }
-
-        // thêm Bomber
-
-
-        // thêm Enemy
-
-
-        // thêm Brick
-
-        // thêm Item kèm Brick che phủ ở trên
 
     }
 
