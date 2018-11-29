@@ -29,8 +29,8 @@ public class Board implements IRender {
 	
 	public Entity[] _entities;
 	public List<Character> _characters = new ArrayList<>();
-	protected List<Bomb> _bombs = new ArrayList<>();
-	private List<Message> _messages = new ArrayList<>();
+	protected List<Bomb> _bombs        = new ArrayList<>();
+	private List<Message> _messages    = new ArrayList<>();
 	
 	private int _screenToShow = -1; //1:endgame, 2:changelevel, 3:paused
 	

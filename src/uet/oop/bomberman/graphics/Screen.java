@@ -6,11 +6,16 @@ import uet.oop.bomberman.entities.Entity;
 import uet.oop.bomberman.entities.character.Bomber;
 
 import java.awt.*;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Xử lý render cho tất cả Entity và một số màn hình phụ ra Game Panel
  */
-public class Screen {
+public class Screen extends JPanel {
 	protected int _width, _height;
 	public int[] _pixels;
 	private int _transparentColor = 0xffff00ff;
@@ -84,34 +89,46 @@ public class Screen {
 		
 		return temp;
 	}
+	public void addImage(String name, Graphics g){
+		String fileName = "res\\images\\" + name;
+		File file = new File(fileName);
+		BufferedImage image = new BufferedImage(getRealWidth(),getRealHeight(), BufferedImage.TYPE_INT_ARGB);
+		try{
+			image = ImageIO.read(file);
+		} catch (IOException e){
+			System.out.println(e);
+		}
+		g.drawImage(image,0,0,super.getRootPane());
+
+	}
 	
 	public void drawEndGame(Graphics g, int points) {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, getRealWidth(), getRealHeight());
-		Font font = new Font("Arial", Font.PLAIN, 20 * Game.SCALE);
+		addImage("end_game.png",g);
+		Font font = new Font("Comic Sans MS", Font.BOLD, 25 * Game.SCALE);
 		g.setFont(font);
-		g.setColor(Color.white);
-		drawCenteredString("GAME OVER", getRealWidth(), getRealHeight(), g);
+		g.setColor(Color.red);
+		drawCenteredString("Game Over", getRealWidth(), getRealHeight(), g);
 		
-		font = new Font("Arial", Font.PLAIN, 10 * Game.SCALE);
+		font = new Font("Comic Sans MS", Font.BOLD, 10 * Game.SCALE);
 		g.setFont(font);
-		g.setColor(Color.yellow);
 		drawCenteredString("POINTS: " + points, getRealWidth(), getRealHeight() + (Game.TILES_SIZE * 2) * Game.SCALE, g);
 	}
 
 	public void drawChangeLevel(Graphics g, int level) {
 		g.setColor(Color.black);
 		g.fillRect(0, 0, getRealWidth(), getRealHeight());
-		
-		Font font = new Font("Arial", Font.PLAIN, 20 * Game.SCALE);
+		addImage("change_level.png", g);
+		Font font = new Font("Comic Sans MS", Font.BOLD, 25 * Game.SCALE);
 		g.setFont(font);
-		g.setColor(Color.white);
+		g.setColor(Color.black);
 		drawCenteredString("LEVEL " + level, getRealWidth(), getRealHeight(), g);
 		
 	}
 	
 	public void drawPaused(Graphics g) {
-		Font font = new Font("Arial", Font.PLAIN, 20 * Game.SCALE);
+		Font font = new Font("Comic Sans MS", Font.BOLD, 20 * Game.SCALE);
 		g.setFont(font);
 		g.setColor(Color.white);
 		drawCenteredString("PAUSED", getRealWidth(), getRealHeight(), g);

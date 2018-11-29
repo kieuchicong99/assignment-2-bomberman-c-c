@@ -5,14 +5,10 @@ import uet.oop.bomberman.gui.Frame;
 import uet.oop.bomberman.input.Keyboard;
 import uet.oop.bomberman.server.Server;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.io.File;
-import java.net.URL;
 
 /**
  * Tạo vòng lặp cho game, lưu trữ một vài tham số cấu hình toàn cục,
@@ -29,17 +25,23 @@ public class Game extends Canvas {
 	public static final String TITLE = "BomberMan";
 
 	public static final int LIVES = 3;
+
 	private static final int BOMBRATE = 1;
+
 	private static final int BOMBRADIUS = 1;
+
 	private static final double BOMBERSPEED = 1.0;
 	
 	public static final int TIME = 200;
+
 	public static final int POINTS = 0;
 	
 	protected static int SCREENDELAY = 3;
 
 	protected static int bombRate = BOMBRATE;
+
 	protected static int bombRadius = BOMBRADIUS;
+
 	protected static double bomberSpeed = BOMBERSPEED;
 	
 	
@@ -108,9 +110,11 @@ public class Game extends Canvas {
 		Graphics g = bs.getDrawGraphics();
 		
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+
 		_board.renderMessages(g);
 		
 		g.dispose();
+
 		bs.show();
 	}
 	
@@ -139,31 +143,31 @@ public class Game extends Canvas {
 			code=server.charAt(0);
 		}
 		System.out.print(server);
-		_input.right=false;
-		_input.left=false;
-		_input.down=false;
-		_input.up=false;
+		_input.right = false;
+		_input.left = false;
+		_input.down = false;
+		_input.up = false;
 		switch (code){
 			case 'U':
-				_input.up=true;
+				_input.up = true;
 				break;
 			case 'D':
-				_input.down=true;
+				_input.down = true;
 				break;
 			case 'L':
-				_input.left=true;
+				_input.left = true;
 				break;
 			case 'R':
-				_input.right=true;
+				_input.right = true;
 				break;
 			case 'B':
-				_input.space=true;
+				_input.space = true;
 				break;
 			case '0':
-				_input.right=false;
-				_input.left=false;
-				_input.down=false;
-				_input.up=false;
+				_input.right = false;
+				_input.left = false;
+				_input.down = false;
+				_input.up = false;
 				_input.update();
 				break;
 		}
